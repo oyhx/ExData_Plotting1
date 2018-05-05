@@ -1,0 +1,13 @@
+power <- read.delim("household_power_consumption.txt", header = TRUE, sep = ";", dec = ".", colClasses = c("character", "character", "numeric","numeric","numeric", "numeric", "numeric","numeric","numeric"), na.strings = "?")
+power2day<- subset(power, (power$Date == "1/2/2007"| power$Date =="2/2/2007"))
+power2day$date_time <- paste(power2day$Date, power2day$Time, sep=" ")
+power2day$date_time <-as.POSIXct(power2day$date_time, format ="%d/%m/%Y %T")
+with(power2day, plot(date_time, Sub_metering_1, type ="l", xlab = "", ylab = "Energy Sub Metering"))
+lines(power2day$date_time, power2day$Sub_metering_2, col = "red" )
+lines(power2day$date_time, power2day$Sub_metering_3, col ="blue")
+#Add legend
+legend("topright", lty=1, lwd=2, c("black", "red", "blue"), legend = c("Sub_Metering_1", "Sub_Metering_2", "Sub_Metering_3"))
+legend("topright", lty=1, lwd=2, col=c("black", "red", "blue"), legend = c("Sub_Metering_1", "Sub_Metering_2", "Sub_Metering_3"))
+dev.copy(png, "Plot3.png")
+dev.off()
+savehistory("~/Desktop/CSC Coursera FY18/4.0 Exploratory Data Analysis/ExData_Plotting1/Plot 3.R")

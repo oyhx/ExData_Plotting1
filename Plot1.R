@@ -1,0 +1,6 @@
+power <- read.delim("household_power_consumption.txt", header = TRUE, sep = ";", dec = ".", colClasses = c("character", "character", "numeric","numeric","numeric", "numeric", "numeric","numeric","numeric"), na.strings = "?")
+power2day<- subset(power, (power$Date == "1/2/2007"| power$Date =="2/2/2007"))
+with(power2day,hist(Global_active_power, col = "red", xlab = "Global Active Power (kilowatts)", ylim = c(0,1200), main ="Global Active Power"))
+dev.copy(png, "Plot1.png")
+dev.off()
+savehistory("~/Desktop/CSC Coursera FY18/4.0 Exploratory Data Analysis/ExData_Plotting1/Plot1.R")

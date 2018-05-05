@@ -1,0 +1,8 @@
+power <- read.delim("household_power_consumption.txt", header = TRUE, sep = ";", dec = ".", colClasses = c("character", "character", "numeric","numeric","numeric", "numeric", "numeric","numeric","numeric"), na.strings = "?")
+power2day<- subset(power, (power$Date == "1/2/2007"| power$Date =="2/2/2007"))
+power2day$date_time <- paste(power2day$Date, power2day$Time, sep=" ")
+power2day$date_time <-as.POSIXct(power2day$date_time, format ="%d/%m/%Y %T")
+with(power2day, plot(date_time, Global_active_power, type ="l", xlab = "", ylab = "Global Active Power (kilowatts)"))
+dev.copy(png, "Plot2.png")
+dev.off()
+savehistory("~/Desktop/CSC Coursera FY18/4.0 Exploratory Data Analysis/ExData_Plotting1/Plot2.R")
